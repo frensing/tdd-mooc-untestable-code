@@ -1,6 +1,9 @@
 import { readFile } from "node:fs/promises";
 import { parse } from "csv-parse/sync";
 
+// the function reads a csv file from system, it does not write
+// we can extract the reading of the file from the logic
+
 export async function parsePeopleCsv(filePath) {
   const csvData = await readFile(filePath, { encoding: "utf8" });
   const records = parse(csvData, {
