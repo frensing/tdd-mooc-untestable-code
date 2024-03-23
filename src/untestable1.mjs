@@ -1,5 +1,8 @@
 const millisPerDay = 24 * 60 * 60 * 1000;
 
+// The code reads the current time by creating a new Date obj. which is 'inherently untestable'.
+// The option to provide a date would enable thorough testing.
+
 export function daysUntilChristmas() {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
