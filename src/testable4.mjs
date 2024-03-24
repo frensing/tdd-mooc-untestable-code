@@ -2,8 +2,7 @@ import argon2 from "@node-rs/argon2";
 import pg from "pg";
 
 
-// class is a singelton, so only one database connection
-// solution would be to do dependency injection
+// class now requires db connection by dependency injection
 export class PostgresUserDao {
   constructor(db) {
     this.db = db
