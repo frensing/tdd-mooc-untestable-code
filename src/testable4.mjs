@@ -5,25 +5,8 @@ import pg from "pg";
 // class is a singelton, so only one database connection
 // solution would be to do dependency injection
 export class PostgresUserDao {
-  static instance;
-
-  static getInstance() {
-    if (!this.instance) {
-      this.instance = new PostgresUserDao();
-    }
-    return this.instance;
-  }
-
-  db = new pg.Pool({
-    user: process.env.PGUSER,
-    host: process.env.PGHOST,
-    database: process.env.PGDATABASE,
-    password: process.env.PGPASSWORD,
-    port: process.env.PGPORT,
-  });
-
-  close() {
-    this.db.end();
+  constructor(db) {
+    this.db = db
   }
 
   #rowToUser(row) {
@@ -55,7 +38,7 @@ export class InMemUserDao {
   users = {}
 
   async getById(id) {
-    return structuredClone(this.users[id])
+    return structuredClone(this.users[id]) || null
   }
 
   async save(user) {
