@@ -1,6 +1,9 @@
 import argon2 from "@node-rs/argon2";
 import pg from "pg";
 
+
+// class is a singelton, so only one database connection
+// solution would be to do dependency injection
 export class PostgresUserDao {
   static instance;
 
@@ -48,6 +51,11 @@ export class PostgresUserDao {
   }
 }
 
+
+// class gets the user dao directly
+// solution would be to inject the dao
+
+// it also uses a third party library to hash the passwords, which may makes it hard to test
 export class PasswordService {
   users = PostgresUserDao.getInstance();
 
